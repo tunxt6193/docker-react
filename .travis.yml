@@ -7,3 +7,16 @@ before_install:
 
 script:
         - docker run tubuntu/docker-react npm run test -- --coverage
+
+deploy:
+        provider: elasticbeanstalk
+        region: "ap-southeast-1"
+        app: "docker-react"
+        env: "DockerReact-env"
+        bucket_name: "elasticbeanstalk-ap-southeast-1-358661719322"
+        bucket_path: "docker-react"
+        on:
+                branch: master
+        access_key_id: $aws_access_key
+        secret_access_key:
+                secure: "$aws_secret_key"
